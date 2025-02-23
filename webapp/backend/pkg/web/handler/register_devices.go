@@ -25,7 +25,7 @@ func RegisterDevices(c *gin.Context) {
 
 	//filter any device with empty wwn (they are invalid)
 	detectedStorageDevices := lo.Filter[models.Device](collectorDeviceWrapper.Data, func(dev models.Device, _ int) bool {
-		return len(dev.WWN) > 0
+		return len(dev.WWN) > 0 && dev.ModelName != ""
 	})
 
 	errs := []error{}
